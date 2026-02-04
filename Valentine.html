@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffc3a0 0%, #ffafbd 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 50px 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            position: relative;
+        }
+
+        .heart {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        .heart svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            10%, 30% {
+                transform: scale(0.9);
+            }
+            20%, 40% {
+                transform: scale(1.1);
+            }
+        }
+
+        h1 {
+            color: #ff69b4;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+        }
+
+        .question {
+            color: #ff1493;
+            font-size: 1.8em;
+            margin: 30px 0;
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.3em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 100%);
+            color: white;
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4);
+        }
+
+        .no-btn {
+            background: #e0e0e0;
+            color: #666;
+        }
+
+        .no-btn:hover {
+            background: #d0d0d0;
+            transform: scale(0.95);
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0;
+            animation: float-up 6s ease-in infinite;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .success-message {
+            display: none;
+            margin-top: 30px;
+            color: #ff1493;
+            font-size: 1.5em;
+            font-weight: bold;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .celebration {
+            display: none;
+            font-size: 3em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <div class="container">
+        <div class="heart">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Heart shape -->
+                <path d="M100,170 C20,120 10,80 10,60 C10,30 30,10 55,10 C70,10 85,20 100,35 C115,20 130,10 145,10 C170,10 190,30 190,60 C190,80 180,120 100,170 Z" 
+                      fill="#ff69b4" 
+                      stroke="#ff1493" 
+                      stroke-width="3"/>
+                
+                <!-- Left eye -->
+                <ellipse cx="70" cy="65" rx="12" ry="18" fill="white"/>
+                <ellipse cx="73" cy="68" rx="8" ry="12" fill="#333"/>
+                <ellipse cx="75" cy="65" rx="4" ry="6" fill="white"/>
+                
+                <!-- Right eye -->
+                <ellipse cx="130" cy="65" rx="12" ry="18" fill="white"/>
+                <ellipse cx="133" cy="68" rx="8" ry="12" fill="#333"/>
+                <ellipse cx="135" cy="65" rx="4" ry="6" fill="white"/>
+                
+                <!-- Blush left -->
+                <ellipse cx="55" cy="85" rx="15" ry="10" fill="#ffb6c1" opacity="0.6"/>
+                
+                <!-- Blush right -->
+                <ellipse cx="145" cy="85" rx="15" ry="10" fill="#ffb6c1" opacity="0.6"/>
+                
+                <!-- Smile -->
+                <path d="M 80,90 Q 100,105 120,90" 
+                      stroke="#ff1493" 
+                      stroke-width="4" 
+                      fill="none" 
+                      stroke-linecap="round"/>
+                
+                <!-- Sparkle 1 -->
+                <g transform="translate(30, 30)">
+                    <path d="M0,-8 L0,8 M-8,0 L8,0" stroke="#ffe4e1" stroke-width="2" stroke-linecap="round"/>
+                </g>
+                
+                <!-- Sparkle 2 -->
+                <g transform="translate(170, 40)">
+                    <path d="M0,-6 L0,6 M-6,0 L6,0" stroke="#ffe4e1" stroke-width="2" stroke-linecap="round"/>
+                </g>
+                
+                <!-- Sparkle 3 -->
+                <g transform="translate(160, 120)">
+                    <path d="M0,-5 L0,5 M-5,0 L5,0" stroke="#ffe4e1" stroke-width="2" stroke-linecap="round"/>
+                </g>
+            </svg>
+        </div>
+        <h1>Hey You!</h1>
+        <p class="question">Will you be my Valentine?</p>
+        
+        <div class="buttons" id="buttonContainer">
+            <button class="yes-btn" onclick="sayYes()">Yes! 💕</button>
+            <button class="no-btn" onclick="sayNo()">No</button>
+        </div>
+        
+        <div class="success-message" id="successMessage">
+            oi thank you honey babies 🥰
+        </div>
+        <div class="celebration" id="celebration">🎉 💕 🎊</div>
+    </div>
+
+    <script>
+        // Create floating hearts in background
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.textContent = '💕';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 3 + 's';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.getElementById('floatingHearts').appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 7000);
+        }
+
+        setInterval(createFloatingHeart, 800);
+
+        function sayYes() {
+            document.getElementById('buttonContainer').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('celebration').style.display = 'block';
+            
+            // Create extra hearts celebration
+            for(let i = 0; i < 20; i++) {
+                setTimeout(createFloatingHeart, i * 100);
+            }
+        }
+
+        function sayNo() {
+            const noBtn = event.target;
+            const container = document.querySelector('.container');
+            
+            // Move the No button randomly
+            const maxX = container.offsetWidth - noBtn.offsetWidth - 40;
+            const maxY = container.offsetHeight - noBtn.offsetHeight - 40;
+            
+            const randomX = Math.random() * maxX - maxX/2;
+            const randomY = Math.random() * maxY - maxY/2;
+            
+            noBtn.style.position = 'relative';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+            
+            // Make Yes button bigger
+            const yesBtn = document.querySelector('.yes-btn');
+            const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = (currentSize * 1.1) + 'px';
+        }
+    </script>
+</body>
+</html>
